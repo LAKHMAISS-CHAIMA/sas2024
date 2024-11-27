@@ -78,6 +78,64 @@ void afficher(){
      printf("Date d'échéance (jour/mois/année) : %d/%d/%d \n", DB[i].dt.jour,DB[i].dt.mois,DB[i].dt.annee);
  }
 }
+void modifier(){
+    int choix;
+    printf("Entrez votre choix de la tâche à modifier : ");
+    scanf("%d", &choix);
+    getchar(); // Consomme le '\n' restant
+    
+    if(choix < 0 || choix >= taches) {
+		printf("choix invalide.\n");
+        return;
+    }
+        printf("Modifier les détails de la tâche existante :\n");
+        // modifier le titre :
+        printf("entrer le nouveau titre (actuel : %s\n)", DB[choix].titre);
+        fgets(DB[choix].titre, 20, stdin);
+        DB[choix].titre[strcspn(DB[choix].titre, "\n")] = '\0'; // Supprime le '\n'
+
+        
+        // modifier la description :
+        printf("entrer la nouvelle description (actuelle : %s\n)", DB[choix].description);
+        fgets(DB[choix].description, 100, stdin);
+        DB[choix].description[strcspn(DB[choix].description, "\n")] = '\0';
+
+
+        // modifier la priorité :
+        do {
+        printf("modifier la prioreté (actuelle : %s\n) (0 : low, 1 : high) ",
+        DB[choix].priorite ? "high" : "low");
+        scanf("%d",&DB[choix].priorite);
+        } while (DB[choix].priorite < 0 || DB[choix].priorite > 1);
+
+
+        // modifier le status :
+        do {
+        printf("modifier le status (actuel : %s\n) (0 : incomplete, 1 : complete) ",
+        DB[choix].status ? "complete" : "incomplete");
+        scanf("%d",&DB[choix].status);
+        } while (DB[choix].status < 0 || DB[choix].status > 1);
+
+
+        // modifier la date :
+        printf("Entrer la nouvelle date (actuelle : %d/%d/%d) :\n",
+           DB[choix].dt.jour, DB[choix].dt.mois, DB[choix].dt.annee);
+
+    do {
+        printf("Jour (1-31) : ");
+        scanf("%d", &DB[choix].dt.jour);
+    } while (DB[choix].dt.jour < 1 || DB[choix].dt.jour > 31);
+
+    do {
+        printf("Mois (1-12) : ");
+        scanf("%d", &DB[choix].dt.mois);
+    } while (DB[choix].dt.mois < 1 || DB[choix].dt.mois > 12);
+
+    printf("Année : ");
+    scanf("%d", &DB[choix].dt.annee);
+
+    printf("Tâche mise à jour avec succès !\n");
+}
 int main(){
 int choix;
 	do{
@@ -95,6 +153,8 @@ int choix;
              break;
              case 2:afficher();
              break;
+              case 3:modifier();
+             break; 
             
         }
         }while(choix!=2);//// Boucle tant que l'utilisateur ne choisit pas de quitter
