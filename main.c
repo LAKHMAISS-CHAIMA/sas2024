@@ -136,6 +136,23 @@ void modifier(){
 
     printf("Tâche mise à jour avec succès !\n");
 }
+void supprimer() {
+    int i;
+    int count;
+     printf("entrez la tache à supprimer:");
+     scanf("%d",&count);
+        if(count <0  || count >= taches){
+                printf("choix invalide !\n");
+       }else{
+            for( i= count; i < taches - 1 ;i++){
+ //la taches - 1 est utilisé pour éviter d'accéder à une position hors des limites du tableau lors du décalage des éléments.               
+
+                DB[i] = DB[i+1];
+            }
+               taches--;
+                printf("Supprimé avec succès !\n");
+       }
+}
 int main(){
 int choix;
 	do{
@@ -155,6 +172,8 @@ int choix;
              break;
               case 3:modifier();
              break; 
+             case 4:supprimer();
+             break;
             
         }
         }while(choix!=2);//// Boucle tant que l'utilisateur ne choisit pas de quitter
