@@ -1,5 +1,5 @@
 #include <stdio.h>// Requise pour les entrées/sorties.
-#include <string.h>//
+#include <string.h>// Requise pour la gestion des chaînes de caractères (strcspn).
 #define max_Tache 200
 typedef struct{
 int jour;
@@ -14,8 +14,12 @@ int  priorite;//0 est low, 1 est high
 int status;//0 est incomplete, 1 est complete
 Date dt;
 }Tache;
+
 Tache DB[max_Tache]; //Base de données des tâches
-int taches = 0;
+int taches = 0; //Variable pour suivre le nombre de tâches actuellement enregistrées dans la base   
+
+
+
 void ajouter() {
     printf(" entrer les détails de tâche : \n " );
 
@@ -63,6 +67,7 @@ void ajouter() {
     taches++; // Incrémenter le compteur
     printf("Tâche ajoutée avec succès !\n");
 }
+
 void afficher(){
 
      int i;
@@ -136,6 +141,7 @@ void modifier(){
 
     printf("Tâche mise à jour avec succès !\n");
 }
+
 void supprimer() {
     int i;
     int count;
@@ -184,6 +190,7 @@ void filtrer(){
 }
 
 int main(){
+
 int choix;
 	do{
 		printf("\n  Menu \n");
@@ -200,8 +207,8 @@ int choix;
              break;
              case 2:afficher();
              break;
-              case 3:modifier();
-             break; 
+             case 3:modifier();
+             break;      
              case 4:supprimer();
              break;
              case 5:filtrer();
@@ -210,10 +217,9 @@ int choix;
              break;
              default : printf("choix invalide");
         }
-        }while(choix!=2);//// Boucle tant que l'utilisateur ne choisit pas de quitter
+        }while(choix!=6);//// Boucle tant que l'utilisateur ne choisit pas de quitter
 
+    return 0;
 }
-
-
 
 
