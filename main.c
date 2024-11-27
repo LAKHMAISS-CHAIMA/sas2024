@@ -153,6 +153,36 @@ void supprimer() {
                 printf("Supprimé avec succès !\n");
        }
 }
+void filtrer(){
+    int i;
+    int priorite;
+    int n = 0; // Variable pour suivre si une tâche est trouvée
+
+    do {
+        printf("Entrez la priorité de la tâche : ");
+        scanf("%d", &priorite);
+        if (priorite != 0 && priorite != 1) {
+            printf("Choix invalide. Utilisez 0 pour low priorité et 1 pour high priorité.\n");
+        }
+    } while (priorite != 0 && priorite != 1);
+
+    printf("Vous avez choisi la priorité : %s\n", priorite == 1 ? "high" : "low");
+
+    for (i = 0; i < taches; i++) {
+        if (DB[i].priorite == priorite) {
+            printf("Titre de la tâche : %s\n", DB[i].titre);
+            printf("Description : %s\n", DB[i].description);
+            printf("Date : %02d/%02d/%04d\n", DB[i].dt.jour, DB[i].dt.mois, DB[i].dt.annee);
+            printf("Statut : %s\n\n", DB[i].status == 1 ? "complete" : "incomplete");
+            n = 1;
+        }
+    }
+
+    if (n == 0) {
+        printf("Aucune tâche trouvée avec cette priorité.\n");
+    }
+}
+
 int main(){
 int choix;
 	do{
@@ -174,7 +204,11 @@ int choix;
              break; 
              case 4:supprimer();
              break;
-            
+             case 5:filtrer();
+             break;
+             case 6: printf("bye bye");
+             break;
+             default : printf("choix invalide");
         }
         }while(choix!=2);//// Boucle tant que l'utilisateur ne choisit pas de quitter
 
