@@ -63,6 +63,21 @@ void ajouter() {
     taches++; // Incrémenter le compteur
     printf("Tâche ajoutée avec succès !\n");
 }
+void afficher(){
+
+     int i;
+     for (i = 0; i < taches; i++){
+     printf("affichage de la tache : \n ");
+     printf("le titre est :%s\n",DB[i].titre);
+     printf("la description est :%s\n",DB[i].description);
+     printf("la priorité est :%s\n",DB[i].priorite ? "high" : "low");
+     printf("le status est :%s\n",DB[i].status ? "complete" : "incomplete");
+     /*L'opérateur ? : est utilisé ici pour effectuer une évaluation conditionnelle sur les valeurs priorité et status.
+      Si la condition est vraie (1), la première valeur est utilisée ("high" ou "complete").
+      Si elle est fausse (0), la deuxième valeur est utilisée ("low" ou "incomplete").*/
+     printf("Date d'échéance (jour/mois/année) : %d/%d/%d \n", DB[i].dt.jour,DB[i].dt.mois,DB[i].dt.annee);
+ }
+}
 int main(){
 int choix;
 	do{
@@ -77,6 +92,8 @@ int choix;
 		scanf("%d",&choix);
 		switch(choix){
              case 1:ajouter();
+             break;
+             case 2:afficher();
              break;
             
         }
